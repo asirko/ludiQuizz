@@ -1,0 +1,11 @@
+[
+  {
+    "question": "Question 1",
+    "possibilite": ["titi", "toto", "tutu", "tata"]
+  }, {
+    "question": "Question 2"
+  }, {
+    "question": "Question 3",
+    "possibilite": ["titi", "toto", "tutu", "tata"]
+  }
+]
