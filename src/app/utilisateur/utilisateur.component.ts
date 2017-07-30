@@ -12,10 +12,6 @@ export class UtilisateurComponent implements OnInit {
 
   ngOnInit() {
     this.answerService.getReponses$().subscribe(a => console.log(a));
-
-    setTimeout(() => {
-      this.answerService.envoyerReponse('test');
-    }, 2000);
   }
 
 }

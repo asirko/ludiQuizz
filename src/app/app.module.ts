@@ -11,6 +11,8 @@ import { AppRoutingModule } from './app-routing.module';
 import { UtilisateurComponent } from './utilisateur/utilisateur.component';
 import { AnswerService } from './utilisateur/answer.service';
 import { QuestionService } from './question.service';
+import { QuestionnaireService } from './admin/questionnaire.service';
+import { HttpModule } from '@angular/http';
 
 @NgModule({
   declarations: [
@@ -24,9 +26,10 @@ import { QuestionService } from './question.service';
   imports: [
     BrowserModule,
     CommonModule,
-    AppRoutingModule
+    AppRoutingModule,
+    HttpModule
   ],
-  providers: [QuestionService, AnswerService],
+  providers: [QuestionService, AnswerService, QuestionnaireService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

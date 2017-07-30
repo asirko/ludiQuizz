@@ -1,0 +1,47 @@
+@import "colors";
+
+.lq-btn {
+  position: relative;
+  padding: 10px 20px;
+  border: 1px solid $lq-color-principal;
+  border-radius: 10px;
+  color: $lq-color-principal;
+  background-color: $lq-color-secondaire;
+  overflow: hidden;
+
+  &:active,
+  &:focus {
+    outline: none;
+  }
+
+  &:before {
+    display: block;
+    visibility: hidden;
+    position: absolute;
+    left: calc(50% - 25px);
+    top: calc(50% - 25px);
+    width: 50px;
+    height: 50px;
+    border-radius: 100%;
+    background-color: rgba(255, 255, 255, 0.3);
+    transition: transform .3s;
+    content: '';
+  }
+  &:active:before {
+    visibility: visible;
+    transform: scale(10);
+  }
+
+  &:disabled,
+  &.disabled {
+    color: $lq-color-gris;
+    border-color: $lq-color-gris;
+    background-color: $lq-color-gris-clair;
+  }
+
+  &.danger {
+    color: $lq-color-alerte;
+    border-color: $lq-color-alerte;
+    background-color: rgba($lq-color-alerte, 0.2);
+  }
+}

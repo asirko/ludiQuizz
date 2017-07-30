@@ -1,0 +1,55 @@
+@import "../../styles/colors";
+
+:host {
+  display: flex;
+  flex-direction: column;
+
+  height: calc(100vh - 40px);
+}
+
+.selecteur-pagination {
+  display: flex;
+  width: 100%;
+  justify-content: space-between;
+
+  .selecteur-pagination-numerotation {
+    line-height: 68px;
+  }
+
+  .fa {
+      padding: 5px 20px;
+      border: 1px solid $lq-color-principal;
+      color: $lq-color-principal;
+    font-size: 2em;
+    border-radius: 4px;
+    background-color: $lq-color-secondaire;
+  }
+
+  .fa-caret-left {
+    padding-right: 25px;
+  }
+
+  .fa-caret-right {
+    padding-left: 25px;
+  }
+}
+
+.selecteur-question {
+  padding: 20px 0;
+  font-style: italic;
+  color: $lq-color-principal;
+}
+
+.commandes {
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+  margin: -10px 0;
+
+  button {
+    display: block;
+    flex-grow: 1;
+    margin: 10px 0;
+  }
+}
+

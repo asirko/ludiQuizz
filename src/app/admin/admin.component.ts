@@ -13,6 +13,10 @@ export class AdminComponent implements OnInit {
   questionnaire: Question[];
   questionCourante: Question;
 
+  get indexQuestion() {
+    return (this.questionnaire || []).indexOf(this.questionCourante) + 1;
+  }
+
   constructor(private questionnaireService: QuestionnaireService,
               private questionService: QuestionService) { }
 
@@ -25,19 +29,30 @@ export class AdminComponent implements OnInit {
     });
   }
 
-  lancerQuestion(): void {
+  choisirQuestion(): void {
     this.questionService.envoyerQuestion(this.questionCourante);
+  }
+
+  afficherPossibilites(): void {
+    this.questionService.envoyerQuestion(this.questionCourante);
+  }
+
+  questionPrecedente(): void {
+    const indexQuestionCourante = this.questionnaire.indexOf(this.questionCourante);
+    if (indexQuestionCourante > 0) {
+      this.questionCourante = this.questionnaire[indexQuestionCourante - 1];
+    }
   }
 
   questionSuivante(): void {
     const indexQuestionCourante = this.questionnaire.indexOf(this.questionCourante);
-    if (this.questionnaire.length > indexQuestionCourante) {
+    if (this.questionnaire.length - 1 > indexQuestionCourante) {
       this.questionCourante = this.questionnaire[indexQuestionCourante + 1];
     }
   }
 
-  afficherReponse(): void {
-
+  afficherResultats(): void {
+    // TODO: ajouter un service de contrôle des affichages
   }
 
 }

@@ -1,3 +1,21 @@
-<p>
-  admin works!
-</p>
+<div class="selecteur">
+  <div class="selecteur-pagination">
+    <i class="fa fa-caret-left selecteur-pagination-precedente"
+       (click)="questionPrecedente()" aria-hidden="true"></i>
+    <div class="selecteur-pagination-numerotation">
+      {{ indexQuestion }} / {{ questionnaire?.length }}
+    </div>
+    <i class="fa fa-caret-right selecteur-pagination-suivante"
+       (click)="questionSuivante()" aria-hidden="true"></i>
+  </div>
+  <div class="selecteur-question">
+    {{ questionCourante?.question }}
+  </div>
+</div>
+
+<div class="commandes">
+  <button class="lq-btn">Démarrer avec cette question</button>
+  <button class="lq-btn">Afficher la question</button>
+  <button class="lq-btn">Afficher les possibilités</button>
+  <button class="lq-btn danger">Afficher les réponses</button>
+</div>
