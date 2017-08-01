@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ReponseService } from './reponse.service';
+import { NomEquipeService } from './nom-equipe/nom-equipe.service';
+import { Observable } from 'rxjs/Observable';
 
 @Component({
   selector: 'lq-utilisateur',
@@ -8,8 +10,13 @@ import { ReponseService } from './reponse.service';
 })
 export class UtilisateurComponent implements OnInit {
 
-  constructor(private reponseService: ReponseService) { }
+  nomEquipe$: Observable<string>;
 
-  ngOnInit() {}
+  constructor(private reponseService: ReponseService,
+              private nomEquipeService: NomEquipeService) { }
+
+  ngOnInit() {
+    this.nomEquipe$ = this.nomEquipeService.getNomEquipe$();
+  }
 
 }

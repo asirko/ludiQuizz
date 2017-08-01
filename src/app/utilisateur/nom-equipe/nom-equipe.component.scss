@@ -1,0 +1,57 @@
+@import "../../../styles/colors";
+
+:host {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.7);
+}
+
+.content {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  padding: 25px;
+  background-color: #fff;
+
+  h1 {
+    text-align: center;
+  }
+
+  input {
+    width: 100%;
+    border: 1px solid $lq-color-principal;
+    padding: 10px 25px;
+    border-radius: 10px;
+    font-size: 1.5rem;
+    text-align: center;
+
+    &:focus {
+      border-width: 2px;
+      outline: none;
+    }
+  }
+
+  .nom-pris {
+    font-size: 1rem;
+  }
+}
+
+@media screen and (orientation: portrait) {
+  .content {
+    padding: 50px 25px 100px;
+    margin: 50px 25px;
+    width: calc(100% - 50px);
+    height: calc(100% - 100px);
+  }
+}
+
+@media screen and (orientation: landscape) {
+  .content {
+    margin: 25px 50px;
+    width: calc(100% - 100px);
+    height: calc(100% - 50px);
+  }
+}

@@ -2,7 +2,6 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 
 import { AppComponent } from './app.component';
-import { TeamNameComponent } from './team-name/team-name.component';
 import { QuestionComponent } from './question/question.component';
 import { AdminComponent } from './admin/admin.component';
 import { ScreenComponent } from './screen/screen.component';
@@ -13,11 +12,15 @@ import { ReponseService } from './utilisateur/reponse.service';
 import { QuestionService } from './question.service';
 import { QuestionnaireService } from './admin/questionnaire.service';
 import { HttpModule } from '@angular/http';
+import { NomEquipeComponent } from './utilisateur/nom-equipe/nom-equipe.component';
+import { FormsModule } from '@angular/forms';
+import { NomEquipeService } from './utilisateur/nom-equipe/nom-equipe.service';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [
     AppComponent,
-    TeamNameComponent,
+    NomEquipeComponent,
     QuestionComponent,
     UtilisateurComponent,
     AdminComponent,
@@ -27,9 +30,11 @@ import { HttpModule } from '@angular/http';
     BrowserModule,
     CommonModule,
     AppRoutingModule,
-    HttpModule
+    HttpModule,
+    HttpClientModule,
+    FormsModule
   ],
-  providers: [QuestionService, ReponseService, QuestionnaireService],
+  providers: [QuestionService, ReponseService, QuestionnaireService, NomEquipeService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

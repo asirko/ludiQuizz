@@ -5,6 +5,8 @@ const app = require('express')();
 const http = require('http').Server(app);
 const io = require('socket.io')(http);
 
+app.use(bodyParser.json());
+
 const REPONSE_CANAL = 'reponse';
 const REPONSES_CANAL = 'reponses';
 const POSSIBILITES_CANAL = 'possibilites';
@@ -42,14 +44,14 @@ io.on('connection', socket => {
   });
 });
 
-app.use(bodyParser.json());
-app.post('/api/enregistrerEquipe', (req, res) => {
+app.post('/enregistrerEquipe', (req, res) => {
+  console.log('###dans post')
   if (req.body.nomEquipe && nomsEquipes.indexOf(req.body.nomEquipe) === -1) {
-    res.statusCode(200);
+    res.sendStatus(200);
     nomsEquipes.push(req.body.nomEquipe);
     io.sockets.emit(EQUIPES_CANAL, nomsEquipes);
   } else {
-    res.statusCode(403);
+    res.sendStatus(403);
   }
 });
 

@@ -1,0 +1,13 @@
+@import "colors";
+
+h1 {
+  font-size: 2.8rem;
+}
+
+* {
+  color: $lq-color-principal;
+}
+
+.danger {
+  color: $lq-color-alerte !important;
+}
