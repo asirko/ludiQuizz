@@ -1,5 +1,5 @@
 <div class="selecteur">
-  <div class="selecteur-pagination">
+  <div class="selecteur-pagination" *ngIf="!isSelected">
     <i class="fa fa-caret-left selecteur-pagination-precedente"
        (click)="questionPrecedente()" aria-hidden="true"></i>
     <div class="selecteur-pagination-numerotation">
@@ -14,8 +14,8 @@
 </div>
 
 <div class="commandes">
-  <button class="lq-btn">Démarrer avec cette question</button>
-  <button class="lq-btn">Afficher la question</button>
-  <button class="lq-btn">Afficher les possibilités</button>
-  <button class="lq-btn danger">Afficher les réponses</button>
+  <button class="lq-btn" *ngIf="!isSelected" (click)="selectionQuestionCourante()">Démarrer avec cette question</button>
+  <button class="lq-btn" *ngIf="isSelected" (click)="afficherQuestion()">Afficher la question</button>
+  <button class="lq-btn" *ngIf="isSelected">Afficher les possibilités</button>
+  <button class="lq-btn danger" *ngIf="isSelected">Afficher les réponses</button>
 </div>

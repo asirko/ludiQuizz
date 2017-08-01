@@ -9,7 +9,7 @@ import { ScreenComponent } from './screen/screen.component';
 import { CommonModule } from '@angular/common';
 import { AppRoutingModule } from './app-routing.module';
 import { UtilisateurComponent } from './utilisateur/utilisateur.component';
-import { AnswerService } from './utilisateur/answer.service';
+import { ReponseService } from './utilisateur/reponse.service';
 import { QuestionService } from './question.service';
 import { QuestionnaireService } from './admin/questionnaire.service';
 import { HttpModule } from '@angular/http';
@@ -29,7 +29,7 @@ import { HttpModule } from '@angular/http';
     AppRoutingModule,
     HttpModule
   ],
-  providers: [QuestionService, AnswerService, QuestionnaireService],
+  providers: [QuestionService, ReponseService, QuestionnaireService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

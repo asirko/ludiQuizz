@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { AnswerService } from './answer.service';
+import { ReponseService } from './reponse.service';
 
 @Component({
   selector: 'lq-utilisateur',
@@ -8,10 +8,8 @@ import { AnswerService } from './answer.service';
 })
 export class UtilisateurComponent implements OnInit {
 
-  constructor(private answerService: AnswerService) { }
+  constructor(private reponseService: ReponseService) { }
 
-  ngOnInit() {
-    this.answerService.getReponses$().subscribe(a => console.log(a));
-  }
+  ngOnInit() {}
 
 }

@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { QuestionnaireService } from './questionnaire.service';
 import { Question } from './question';
 import { QuestionService } from '../question.service';
+import { ReponseService } from '../utilisateur/reponse.service';
 
 @Component({
   selector: 'lq-admin',
@@ -12,13 +13,15 @@ export class AdminComponent implements OnInit {
 
   questionnaire: Question[];
   questionCourante: Question;
+  isSelected = false;
 
   get indexQuestion() {
     return (this.questionnaire || []).indexOf(this.questionCourante) + 1;
   }
 
   constructor(private questionnaireService: QuestionnaireService,
-              private questionService: QuestionService) { }
+              private questionService: QuestionService,
+              private reponseService: ReponseService) { }
 
   ngOnInit() {
     this.questionnaireService.getQuestionnaire$().subscribe(q => {
@@ -29,12 +32,16 @@ export class AdminComponent implements OnInit {
     });
   }
 
-  choisirQuestion(): void {
+  afficherQuestion(): void {
     this.questionService.envoyerQuestion(this.questionCourante);
   }
 
   afficherPossibilites(): void {
-    this.questionService.envoyerQuestion(this.questionCourante);
+    this.reponseService.envoyerPossibilites(this.questionCourante.possibilite);
+  }
+
+  afficherResultats(): void {
+    // TODO: ajouter un service de contrôle des affichages
   }
 
   questionPrecedente(): void {
@@ -51,8 +58,8 @@ export class AdminComponent implements OnInit {
     }
   }
 
-  afficherResultats(): void {
-    // TODO: ajouter un service de contrôle des affichages
+  selectionQuestionCourante() {
+    this.isSelected = true;
   }
 
 }
