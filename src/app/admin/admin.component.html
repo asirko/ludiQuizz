@@ -1,21 +1,24 @@
-<div class="selecteur">
-  <div class="selecteur-pagination" *ngIf="!isSelected">
-    <i class="fa fa-caret-left selecteur-pagination-precedente"
-       (click)="questionPrecedente()" aria-hidden="true"></i>
-    <div class="selecteur-pagination-numerotation">
-      {{ indexQuestion }} / {{ questionnaire?.length }}
+<div class="selector">
+  <div class="selector-paging" *ngIf="!isSelected">
+    <i class="fa fa-caret-left selector-paging-previous"
+       (click)="previousQuestion()" aria-hidden="true"></i>
+    <div class="selector-paging-number">
+      {{ indexQuestion }} / {{ questions?.length }}
     </div>
-    <i class="fa fa-caret-right selecteur-pagination-suivante"
-       (click)="questionSuivante()" aria-hidden="true"></i>
+    <i class="fa fa-caret-right selector-paging-next"
+       (click)="nextQuestion()" aria-hidden="true"></i>
   </div>
-  <div class="selecteur-question">
-    {{ questionCourante?.question }}
+  <div class="selector-question">
+    <div class="selector-question-label">
+      {{ currentQuestion?.question }}
+    </div>
+
   </div>
 </div>
 
-<div class="commandes">
-  <button class="lq-btn" *ngIf="!isSelected" (click)="selectionQuestionCourante()">Démarrer avec cette question</button>
-  <button class="lq-btn" *ngIf="isSelected" (click)="afficherQuestion()">Afficher la question</button>
-  <button class="lq-btn" *ngIf="isSelected">Afficher les possibilités</button>
-  <button class="lq-btn danger" *ngIf="isSelected">Afficher les réponses</button>
+<div class="commands">
+  <button class="lq-btn" *ngIf="!isSelected" (click)="selectCurrentQuestion()">Démarrer avec cette question</button>
+  <button class="lq-btn" *ngIf="isSelected" (click)="displayQuestion()">Afficher la question</button>
+  <button class="lq-btn" *ngIf="isSelected" (click)="displayPossibilites()">Afficher les possibilités</button>
+  <button class="lq-btn danger" *ngIf="isSelected" (click)="displayAnswer()">Afficher les réponses</button>
 </div>

@@ -1,8 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { QuestionnaireService } from './questionnaire.service';
 import { Question } from './question';
-import { QuestionService } from '../question.service';
-import { ReponseService } from '../utilisateur/reponse.service';
+import { AdminService } from './admin.service';
 
 @Component({
   selector: 'lq-admin',
@@ -11,55 +10,57 @@ import { ReponseService } from '../utilisateur/reponse.service';
 })
 export class AdminComponent implements OnInit {
 
-  questionnaire: Question[];
-  questionCourante: Question;
+  questions: Question[];
+  currentQuestion: Question;
   isSelected = false;
 
   get indexQuestion() {
-    return (this.questionnaire || []).indexOf(this.questionCourante) + 1;
+    return (this.questions || []).indexOf(this.currentQuestion) + 1;
   }
 
   constructor(private questionnaireService: QuestionnaireService,
-              private questionService: QuestionService,
-              private reponseService: ReponseService) { }
+              private adminService: AdminService) { }
 
   ngOnInit() {
     this.questionnaireService.getQuestionnaire$().subscribe(q => {
-      this.questionnaire = q;
-      if (this.questionnaire.length) {
-        this.questionCourante = this.questionnaire[0];
+      this.questions = q;
+      if (this.questions.length) {
+        this.currentQuestion = this.questions[0];
       }
     });
   }
 
-  afficherQuestion(): void {
-    this.questionService.envoyerQuestion(this.questionCourante);
+  displayQuestion(): void {
+    this.adminService.sendQuestion(this.currentQuestion);
   }
 
-  afficherPossibilites(): void {
-    this.reponseService.envoyerPossibilites(this.questionCourante.possibilite);
+  displayPossibilites(): void {
+    this.adminService.sendChoices(this.currentQuestion.possibilite);
   }
 
-  afficherResultats(): void {
-    // TODO: ajouter un service de contrôle des affichages
+  displayAnswer(): void {
+    this.adminService.sendDisplayAnswer(true);
+    this.isSelected = false;
   }
 
-  questionPrecedente(): void {
-    const indexQuestionCourante = this.questionnaire.indexOf(this.questionCourante);
+  previousQuestion(): void {
+    const indexQuestionCourante = this.questions.indexOf(this.currentQuestion);
     if (indexQuestionCourante > 0) {
-      this.questionCourante = this.questionnaire[indexQuestionCourante - 1];
+      this.currentQuestion = this.questions[indexQuestionCourante - 1];
     }
   }
 
-  questionSuivante(): void {
-    const indexQuestionCourante = this.questionnaire.indexOf(this.questionCourante);
-    if (this.questionnaire.length - 1 > indexQuestionCourante) {
-      this.questionCourante = this.questionnaire[indexQuestionCourante + 1];
+  nextQuestion(): void {
+    const indexCurrentQuestion = this.questions.indexOf(this.currentQuestion);
+    if (this.questions.length - 1 > indexCurrentQuestion) {
+      this.currentQuestion = this.questions[indexCurrentQuestion + 1];
     }
   }
 
-  selectionQuestionCourante() {
+  selectCurrentQuestion() {
     this.isSelected = true;
+    this.adminService.sendChoices(null);
+    this.adminService.sendQuestion(null);
   }
 
 }

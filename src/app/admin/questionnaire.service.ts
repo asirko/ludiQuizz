@@ -10,7 +10,7 @@ export class QuestionnaireService {
   constructor(private http: Http) { }
 
   getQuestionnaire$(): Observable<Question[]> {
-    return this.http.get('assets/questionnaire.json')
+    return this.http.get('assets/questions.json')
       .map(res => res.json());
   }
 

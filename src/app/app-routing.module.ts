@@ -1,13 +1,13 @@
-
 import { RouterModule, Routes } from '@angular/router';
-import { AdminComponent } from './admin/admin.component';
 import { NgModule } from '@angular/core';
+
+import { AdminComponent } from './admin/admin.component';
 import { ScreenComponent } from './screen/screen.component';
-import { UtilisateurComponent } from './utilisateur/utilisateur.component';
+import { PlayerComponent } from './player/player.component';
 
 const routes: Routes = [{
   path: '',
-  component: UtilisateurComponent
+  component: PlayerComponent
 }, {
   path: 'admin',
   component: AdminComponent

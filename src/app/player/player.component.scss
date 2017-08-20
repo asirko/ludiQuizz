@@ -1,0 +1,41 @@
+@import "../../styles/colors";
+
+.content {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.name {
+  padding: 7px 0 15px;
+  text-align: center;
+  border-radius: 100px;
+  border: 1px solid $lq-color-principal;
+}
+
+.separator {
+  margin: 20px 0;
+  border: 1px solid $lq-color-principal;
+}
+
+.choices {
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  margin: -5px 0;
+
+  .choice {
+    flex-grow: 1;
+    margin: 5px 0;
+    text-align: center;
+  }
+}
+
+@media screen and (orientation: portrait) {
+
+}
+
+@media screen and (orientation: landscape) {
+
+}

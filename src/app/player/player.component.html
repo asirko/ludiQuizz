@@ -1,0 +1,13 @@
+<lq-player-name *ngIf="chooseName"></lq-player-name>
+
+
+<div class="content" *ngIf="playerName">
+  <div class="lq-btn name" (click)="chooseName = true">{{ playerName }}</div>
+
+  <div class="separator"></div>
+
+  <div class="choices">
+    <button class="lq-btn choice" *ngFor="let choice of choices">{{ choice }}</button>
+  </div>
+</div>
+

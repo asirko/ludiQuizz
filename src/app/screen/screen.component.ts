@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { QuestionService } from '../question.service';
 
 @Component({
   selector: 'lq-screen',
@@ -8,10 +7,9 @@ import { QuestionService } from '../question.service';
 })
 export class ScreenComponent implements OnInit {
 
-  constructor(private questionService: QuestionService) { }
+  constructor() { }
 
   ngOnInit() {
-    this.questionService.getQuestion$().subscribe(console.log);
   }
 
 }
