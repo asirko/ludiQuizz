@@ -1,7 +1,7 @@
 module.exports = function (socket) {
 
   console.log('connection on admin');
-  socket.localData = {};
+  socket.nsp.localData = {};
 
   socket.on('question', question => {
     console.log('New question : ', question);
@@ -17,5 +17,9 @@ module.exports = function (socket) {
     console.log('Change display to : ', displayAnswer);
     socket.broadcast.emit('displayAnswer', displayAnswer);
   });
+
+  function updateTiming() {
+    //todo: send moment(date) when choices and question are both sent
+  }
 
 };

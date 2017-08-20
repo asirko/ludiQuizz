@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { PlayerService } from '../player/player.service';
+import { Observable } from 'rxjs/Observable';
+import { Player } from '../player/player';
 
 @Component({
   selector: 'lq-screen',
@@ -7,9 +10,12 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ScreenComponent implements OnInit {
 
-  constructor() { }
+  players$: Observable<Player[]>;
+
+  constructor(private playerService: PlayerService) { }
 
   ngOnInit() {
+    this.players$ = this.playerService.getPlayers$();
   }
 
 }

@@ -3,6 +3,7 @@ import { Observable } from 'rxjs/Observable';
 import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 import * as io from 'socket.io-client';
 import { SOCKET_END_POINT } from '../shared/socket.utils';
+import { Player } from './player';
 
 const TEAM_NAMESPACE = '/player';
 
@@ -25,7 +26,21 @@ export class PlayerService {
         observer.next(isOk);
         observer.complete();
       });
+    });
+  }
 
+  sendAnswer(answer: string): Observable<Date> {
+    return new Observable(observer => {
+      this.socket.emit('answer', answer, date => observer.next(new Date(date)));
+    });
+  }
+
+  getPlayers$(): Observable<Player[]> {
+    return new Observable(observer => {
+      this.socket.on('allPlayers', players => {
+        players.forEach(p => p.date = new Date(p.date));
+        observer.next(players)
+      });
     });
   }
 

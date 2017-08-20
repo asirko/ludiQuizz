@@ -15,17 +15,22 @@ module.exports = function (socket) {
     }
     console.log('Name \'' + playerName + '\' is ' + (newNameIsAvailable ? '' : 'NOT ') + 'available');
     response(newNameIsAvailable);
+    updateAllPlayers();
   });
 
-  socket.on('response', response => {
-    socket.localData.response = response;
+  socket.on('answer', (answer, response) => {
+    socket.localData.answer = answer;
     socket.localData.date = new Date();
-    console.log(socket.localData.name + ' choose : ' + response + ' at ' + socket.localData.date);
-    updateAllPlayers()
+    response(socket.localData.date);
+    console.log(socket.localData.name + ' choose : ' + answer + ' at ' + socket.localData.date);
+    updateAllPlayers();
   });
 
   function updateAllPlayers() {
-    // todo
+    const allPlayer = getAllPlayerSocket()
+      .map(playerSocket => playerSocket.localData);
+    socket.nsp.emit('allPlayers', allPlayer);
+    console.log('Players list updated', allPlayer);
   }
 
   function getAllPlayerSocket() {

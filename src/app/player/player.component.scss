@@ -29,6 +29,12 @@
     flex-grow: 1;
     margin: 5px 0;
     text-align: center;
+
+    &.selected {
+      color: $lq-color-principal;
+      border-color: $lq-color-principal;
+      background-color: $lq-color-secondaire;
+    }
   }
 }
 

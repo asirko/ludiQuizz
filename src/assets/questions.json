@@ -3,7 +3,8 @@
     "question": "Question 1",
     "possibilite": ["titi", "toto", "tutu", "tata"]
   }, {
-    "question": "Question 2"
+    "question": "Question 2",
+  "possibilite": ["titi2", "toto2", "tutu2", "tata2"]
   }, {
     "question": "Question 3",
     "possibilite": ["titi", "toto", "tutu", "tata"]

@@ -10,27 +10,34 @@ import { AdminService } from '../admin/admin.service';
 })
 export class PlayerComponent implements OnInit {
 
-  chooseName = true;
+  displayPopinName = true;
   playerName: string;
   choices: string[];
-  selectedChoice: string;
+  selectedAnswer: string;
+  dateOfAnswer: Date;
 
-  constructor(private nomEquipeService: PlayerService,
+  constructor(private playerService: PlayerService,
               private adminService: AdminService) { }
 
   ngOnInit() {
-    this.nomEquipeService.getPlayerName$()
+    this.playerService.getPlayerName$()
       .filter(name => name !== null)
       .subscribe(newName => {
         this.playerName = newName;
-        this.chooseName = false;
+        this.displayPopinName = false;
       });
 
     this.adminService.getChoices$().subscribe(choices => {
       this.choices = choices;
-      console.log('ici')
-      this.selectedChoice = null;
+      this.selectedAnswer = null;
+      this.dateOfAnswer = null;
     });
   }
 
+  sendAnswer(answer: string): void {
+    this.playerService.sendAnswer(answer).subscribe(date => {
+      this.dateOfAnswer = date;
+    });
+    this.selectedAnswer = answer;
+  }
 }

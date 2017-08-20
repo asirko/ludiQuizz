@@ -1,13 +1,19 @@
-<lq-player-name *ngIf="chooseName"></lq-player-name>
+<lq-player-name *ngIf="displayPopinName"></lq-player-name>
 
 
 <div class="content" *ngIf="playerName">
-  <div class="lq-btn name" (click)="chooseName = true">{{ playerName }}</div>
+  <div class="lq-btn name" (click)="displayPopinName = true">{{ playerName }}</div>
 
   <div class="separator"></div>
 
   <div class="choices">
-    <button class="lq-btn choice" *ngFor="let choice of choices">{{ choice }}</button>
+    <button *ngFor="let choice of choices"
+            class="lq-btn choice" [class.selected]="choice === selectedAnswer"
+            [disabled]="selectedAnswer"
+            (click)="sendAnswer(choice)">
+      {{ choice }}
+      <span *ngIf="dateOfAnswer && choice === selectedAnswer"><br>{{dateOfAnswer}}</span>
+    </button>
   </div>
 </div>
 
