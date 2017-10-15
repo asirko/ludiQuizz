@@ -11,7 +11,11 @@ export class QuestionnaireService {
 
   getQuestionnaire$(): Observable<Question[]> {
     return this.http.get('assets/questions.json')
-      .map(res => res.json());
+      .map(res => res.json())
+      .map(questions => {
+        questions.forEach((q, i) => q.index = i);
+        return questions;
+      });
   }
 
 }

@@ -31,14 +31,18 @@ export class PlayerService {
 
   sendAnswer(answer: string): Observable<Date> {
     return new Observable(observer => {
-      this.socket.emit('answer', answer, date => observer.next(new Date(date)));
+      this.socket.emit('answer', answer, strDate => observer.next(strDate && new Date(strDate)));
     });
+  }
+
+  resetAllAnswer(): void {
+    this.socket.emit('resetAllAnswer');
   }
 
   getPlayers$(): Observable<Player[]> {
     return new Observable(observer => {
       this.socket.on('allPlayers', players => {
-        players.forEach(p => p.date = new Date(p.date));
+        players.forEach(p => p.date = p.date && new Date(p.date));
         observer.next(players)
       });
     });

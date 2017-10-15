@@ -1,0 +1,47 @@
+@import "../../styles/colors";
+
+.question {
+  display: flex;
+  justify-content: space-around;
+  padding-bottom: 20px;
+  margin: 20px 0;
+  border-bottom: 1px solid $lq-color-principal;
+}
+.question-label {
+  flex-grow: 1;
+}
+.question-timer {
+  width: 15%;
+  font-weight: bold;
+  text-align: right;
+}
+
+.players {
+  display: flex;
+  flex-wrap: wrap;
+  width: 100%;
+
+  & > * {
+    flex: 1;
+    width: 0;
+  }
+}
+
+.player {
+  display: flex;
+  justify-content: space-between;
+  padding: 10px 20px;
+  border: 1px solid $lq-color-principal;
+  border-radius: 8px;
+  margin: 10px;
+
+  & > * {
+    width: 33%;
+  }
+  :nth-child(2) {
+    text-align: center;
+  }
+  :nth-child(3) {
+    text-align: right;
+  }
+}

@@ -26,6 +26,16 @@ module.exports = function (socket) {
     updateAllPlayers();
   });
 
+  socket.on('resetAllAnswer', () => {
+    console.log('reset all answer for players');
+    getAllPlayerSocket()
+      .forEach(p => {
+        p.localData.answer = null;
+        p.localData.date = null;
+      });
+    updateAllPlayers();
+  });
+
   function updateAllPlayers() {
     const allPlayer = getAllPlayerSocket()
       .map(playerSocket => playerSocket.localData);
@@ -39,5 +49,10 @@ module.exports = function (socket) {
       .map(socketID => socketObj[socketID])
       .filter(socket => socket.localData.name);
   }
+
+  socket.on('disconnect', () => {
+    console.log(socket.localData.name || '-UNKNOWN-', ' left the game');
+    updateAllPlayers();
+  });
 
 };

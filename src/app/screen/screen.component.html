@@ -1,8 +1,23 @@
-<div class="players">
-  <div class="player" *ngFor="let player of players$ | async">
-    {{ player.name }}
-    {{ player.answer }}
-    {{ player.date }}
-  </div>
+
+<div class="question">
+  <div class="question-label">{{ (question$ | async)?.question }}&nbsp;</div>
+  <div class="question-timer">{{ timeSinceStarted$ | async }}</div>
 </div>
-<div class="question"></div>
+
+<div class="players">
+  <div class="column">
+    <div class="player" *ngFor="let player of orderByDate(players$ | async) | slice:0:4">
+      <span>{{ player.name }}</span>
+      <span *ngIf="displayAnswer$ | async">{{ player.answer }}</span>
+      <span>{{ getFormattedTiming(player.date) }}</span>
+    </div>
+  </div>
+  <div class="column">
+    <div class="player" *ngFor="let player of orderByDate(players$ | async) | slice:4:8">
+      <span>{{ player.name }}</span>
+      <span *ngIf="displayAnswer$ | async">{{ player.answer }}</span>
+      <span>{{ getFormattedTiming(player.date) }}</span>
+    </div>
+  </div>
+
+</div>

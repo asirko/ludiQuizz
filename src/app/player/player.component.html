@@ -9,10 +9,10 @@
   <div class="choices">
     <button *ngFor="let choice of choices"
             class="lq-btn choice" [class.selected]="choice === selectedAnswer"
-            [disabled]="selectedAnswer"
+            [disabled]="!dateOfQuestion || selectedAnswer"
             (click)="sendAnswer(choice)">
       {{ choice }}
-      <span *ngIf="dateOfAnswer && choice === selectedAnswer"><br>{{dateOfAnswer}}</span>
+      <span *ngIf="dateOfAnswer && choice === selectedAnswer"><br>{{ getTimeToAnswer() }}</span>
     </button>
   </div>
 </div>

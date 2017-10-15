@@ -3,6 +3,7 @@ import { Observable } from 'rxjs/Observable';
 import { SOCKET_END_POINT } from '../shared/socket.utils';
 import { Question } from './question';
 import * as io from 'socket.io-client';
+import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 
 const ADMIN_NAMESPACE = '/admin';
 
@@ -10,9 +11,20 @@ const ADMIN_NAMESPACE = '/admin';
 export class AdminService {
 
   socket: SocketIOClient.Socket;
+  question$ = new BehaviorSubject<Question>(null);
+  choices$ = new BehaviorSubject<string[]>(null);
+  displayAnswer$ = new BehaviorSubject<boolean>(false);
+  startingDate$ = new BehaviorSubject<Date>(null);
 
   constructor() {
     this.socket = io(ADMIN_NAMESPACE, {path: SOCKET_END_POINT});
+
+    this.socket.on('question', question => this.question$.next(question));
+    this.socket.on('choices', choices => this.choices$.next(choices));
+    this.socket.on('displayAnswer', displayAnswer => this.displayAnswer$.next(displayAnswer));
+    this.socket.on('startingDate', strDate => {
+      this.startingDate$.next(strDate && new Date(strDate));
+    });
   }
 
   sendQuestion(question: Question): void {
@@ -20,11 +32,7 @@ export class AdminService {
   }
 
   getQuestion$(): Observable<Question> {
-    return new Observable(observer => {
-      this.socket.on('question', (question) => {
-        observer.next(question);
-      });
-    });
+    return this.question$.asObservable();
   }
 
   sendChoices(choices: string[]): void {
@@ -32,11 +40,7 @@ export class AdminService {
   }
 
   getChoices$(): Observable<string[]> {
-    return new Observable(observer => {
-      this.socket.on('choices', choices => {
-        observer.next(choices);
-      });
-    });
+    return this.choices$.asObservable();
   }
 
   sendDisplayAnswer(displayAnswer: boolean): void {
@@ -44,11 +48,15 @@ export class AdminService {
   }
 
   getDisplayAnswer$(): Observable<boolean> {
-    return new Observable(observer => {
-      this.socket.on('displayAnswer', displayAnswer => {
-        observer.next(displayAnswer);
-      });
-    });
+    return this.displayAnswer$.asObservable();
+  }
+
+  getStartingDate$(): Observable<Date> {
+    return this.startingDate$.asObservable();
+  }
+
+  isStarted(): Observable<boolean> {
+    return this.getStartingDate$().map(date => !!date);
   }
 
 }

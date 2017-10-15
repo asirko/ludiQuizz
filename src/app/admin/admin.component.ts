@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { QuestionnaireService } from './questionnaire.service';
 import { Question } from './question';
 import { AdminService } from './admin.service';
+import { PlayerService } from '../player/player.service';
 
 @Component({
   selector: 'lq-admin',
@@ -19,7 +20,8 @@ export class AdminComponent implements OnInit {
   }
 
   constructor(private questionnaireService: QuestionnaireService,
-              private adminService: AdminService) { }
+              private adminService: AdminService,
+              private playerService: PlayerService) { }
 
   ngOnInit() {
     this.questionnaireService.getQuestionnaire$().subscribe(q => {
@@ -61,6 +63,7 @@ export class AdminComponent implements OnInit {
     this.isSelected = true;
     this.adminService.sendChoices(null);
     this.adminService.sendQuestion(null);
+    this.playerService.resetAllAnswer();
   }
 
 }

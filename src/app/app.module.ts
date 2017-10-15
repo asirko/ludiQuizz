@@ -15,6 +15,7 @@ import { PlayerService } from './player/player.service';
 import { HttpClientModule } from '@angular/common/http';
 import { AutofocusDirective } from './shared/autofocus/autofocus.directive';
 import { AdminService } from './admin/admin.service';
+import { TestComponent } from './player/test/test.component';
 
 @NgModule({
   declarations: [
@@ -23,7 +24,8 @@ import { AdminService } from './admin/admin.service';
     PlayerComponent,
     AdminComponent,
     ScreenComponent,
-    AutofocusDirective
+    AutofocusDirective,
+    TestComponent
   ],
   imports: [
     BrowserModule,

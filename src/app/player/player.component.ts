@@ -15,6 +15,7 @@ export class PlayerComponent implements OnInit {
   choices: string[];
   selectedAnswer: string;
   dateOfAnswer: Date;
+  dateOfQuestion: Date;
 
   constructor(private playerService: PlayerService,
               private adminService: AdminService) { }
@@ -32,6 +33,9 @@ export class PlayerComponent implements OnInit {
       this.selectedAnswer = null;
       this.dateOfAnswer = null;
     });
+
+    this.adminService.getStartingDate$()
+      .subscribe(startingDate => this.dateOfQuestion = startingDate);
   }
 
   sendAnswer(answer: string): void {
@@ -39,5 +43,15 @@ export class PlayerComponent implements OnInit {
       this.dateOfAnswer = date;
     });
     this.selectedAnswer = answer;
+  }
+
+  getTimeToAnswer(): string {
+    if (!this.dateOfQuestion || !this.dateOfAnswer) {
+      return '';
+    }
+    const totalMsSinceStart = this.dateOfAnswer.getTime() - this.dateOfQuestion.getTime();
+    const secSinceStart = Math.floor(totalMsSinceStart / 1000);
+    const msSinceStart = totalMsSinceStart % 1000;
+    return `${secSinceStart}s ${msSinceStart}`;
   }
 }
